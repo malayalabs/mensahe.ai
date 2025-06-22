@@ -96,3 +96,9 @@ For issues and questions:
 - Create an issue on GitHub
 - Check the documentation
 - Review the code examples 
+
+---
+
+<div align="center">
+  <sub style="color: #6c757d; font-size: small;">Made with ❤️ from 🇵🇭</sub>
+</div>
