@@ -44,6 +44,7 @@ To use a custom domain like `mensahe.ai`:
 ```
 static-site/
 ├── index.html          # Main landing page
+├── mensahe-logo.svg    # App logo from extension
 ├── README.md           # This file
 └── CNAME              # Custom domain (if using)
 ```

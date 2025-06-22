@@ -1,0 +1,23 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Main window with purple background -->
+  <rect width="64" height="64" rx="12" fill="#6B46C1"/>
+  
+  <!-- Browser chrome -->
+  <path d="M12 0H52C58.6274 0 64 5.37258 64 12V24H0V12C0 5.37258 5.37258 0 12 0Z" fill="#E2E8F0"/>
+  
+  <!-- Window buttons -->
+  <circle cx="14" cy="12" r="4" fill="#FBBF24"/>
+  <circle cx="26" cy="12" r="4" fill="#F87171"/>
+  
+  <!-- Chat Bubble -->
+  <path d="M16 32C12.6863 32 10 34.6863 10 38V48C10 51.3137 12.6863 54 16 54H28L34 60V54H40C43.3137 54 46 51.3137 46 48V38C46 34.6863 43.3137 32 40 32H16Z" fill="#FDF6E3"/>
+  <circle cx="20" cy="43" r="2" fill="#4A5568"/>
+  <circle cx="28" cy="43" r="2" fill="#4A5568"/>
+  <circle cx="36" cy="43" r="2" fill="#4A5568"/>
+
+  <!-- Smiley Face -->
+  <circle cx="48" cy="48" r="12" fill="#FBBF24"/>
+  <circle cx="44" cy="46" r="2" fill="#4A5568"/>
+  <circle cx="52" cy="46" r="2" fill="#4A5568"/>
+  <path d="M42 52 C 44 56, 52 56, 54 52" stroke="#4A5568" stroke-width="2" fill="none" stroke-linecap="round"/>
+</svg> 

@@ -55,6 +55,20 @@
             font-weight: 700;
             color: #4299e1;
             text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo img {
+            width: 32px;
+            height: 32px;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #4299e1;
         }
 
         .nav-links {
@@ -332,7 +346,10 @@
     <!-- Header -->
     <header class="header">
         <nav class="nav container">
-            <a href="#" class="logo">💬 Mensahe</a>
+            <a href="#" class="logo">
+                <img src="mensahe-logo.svg" alt="Mensahe Logo">
+                <span class="logo-text">Mensahe</span>
+            </a>
             <ul class="nav-links">
                 <li><a href="#features">Features</a></li>
                 <li><a href="#how-it-works">How It Works</a></li>
