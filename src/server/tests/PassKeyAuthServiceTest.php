@@ -113,6 +113,14 @@ final class PassKeyAuthServiceTest extends TestCase
 
     public function testVerifyRegistrationWithNoSession(): void
     {
+        // Ensure no session is active and clear any session data
+        if (session_status() === PHP_SESSION_ACTIVE) {
+            session_destroy();
+        }
+        
+        // Clear any session data that might persist
+        $_SESSION = [];
+        
         $result = $this->authService->verifyRegistration([
             'id' => 'test-id',
             'type' => 'public-key',

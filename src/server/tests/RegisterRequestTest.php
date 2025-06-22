@@ -7,41 +7,6 @@ use Mensahe\Lib\RegisterRequestLib;
 
 final class RegisterRequestTest extends TestCase
 {
-    public function testValidateUsernameValid(): void
-    {
-        $data = ['username' => 'valid_user123'];
-        $result = RegisterRequestLib::validateUsername($data);
-        $this->assertSame('valid_user123', $result);
-    }
-
-    public function testValidateUsernameInvalidEmpty(): void
-    {
-        $this->expectException(Exception::class);
-        $this->expectExceptionMessage('Invalid username');
-        RegisterRequestLib::validateUsername(['username' => '']);
-    }
-
-    public function testValidateUsernameInvalidPattern(): void
-    {
-        $this->expectException(Exception::class);
-        $this->expectExceptionMessage('Invalid username');
-        RegisterRequestLib::validateUsername(['username' => 'ab']);
-    }
-
-    public function testValidateUsernameMissing(): void
-    {
-        $this->expectException(Exception::class);
-        $this->expectExceptionMessage('Invalid username');
-        RegisterRequestLib::validateUsername([]);
-    }
-
-    public function testGetRequestDataInvalidJson(): void
-    {
-        $this->expectException(Exception::class);
-        $this->expectExceptionMessage('Invalid JSON');
-        RegisterRequestLib::getRequestData('not-json');
-    }
-
     public function testValidateUsernameValidEmail(): void
     {
         $data = ['username' => 'user@example.com'];
@@ -82,6 +47,27 @@ final class RegisterRequestTest extends TestCase
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('Invalid email address');
         RegisterRequestLib::validateUsername(['username' => '@example.com']);
+    }
+
+    public function testValidateUsernameInvalidEmpty(): void
+    {
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Invalid email address');
+        RegisterRequestLib::validateUsername(['username' => '']);
+    }
+
+    public function testValidateUsernameMissing(): void
+    {
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Invalid email address');
+        RegisterRequestLib::validateUsername([]);
+    }
+
+    public function testGetRequestDataInvalidJson(): void
+    {
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Invalid JSON');
+        RegisterRequestLib::getRequestData('not-json');
     }
 }
 
