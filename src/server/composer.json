@@ -1,0 +1,10 @@
+{
+    "require": {
+        "web-auth/webauthn-lib": "^5.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Mensahe\\": ""
+        }
+    }
+}

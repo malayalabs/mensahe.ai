@@ -48,6 +48,9 @@ coverage
 node_modules/
 jspm_packages/
 
+# PHP dependencies
+src/server/vendor/
+
 # Optional npm cache directory
 .npm
 

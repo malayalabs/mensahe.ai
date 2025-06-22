@@ -1,6 +1,9 @@
 const WIDGET_CONTAINER_ID = 'mensahe-widget-container';
 const LAUNCHER_ID = 'mensahe-launcher';
 
+// Backend configuration
+const BACKEND_URL = 'http://localhost:8080';
+
 function getLoginHTML(iconUrl) {
   return `
     <div class="title-bar">
@@ -19,11 +22,54 @@ function getLoginHTML(iconUrl) {
         <input type="text" id="username" name="username" placeholder="e.g., Jane Doe" />
       </div>
       <button id="login-button">Sign In</button>
+      <div id="status-message" class="status-message"></div>
       <div class="footer">
         <p>Made with ❤️ from 🇵🇭</p>
       </div>
     </div>
   `;
+}
+
+async function handleLogin(username, shadowRoot) {
+  const statusElement = shadowRoot.getElementById('status-message');
+
+  try {
+    statusElement.textContent = 'Connecting to server...';
+    statusElement.className = 'status-message loading';
+
+    const response = await fetch(`${BACKEND_URL}/register-request.php`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ username })
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      statusElement.textContent = '✅ Registration options received! Ready for passkey creation.';
+      statusElement.className = 'status-message success';
+
+      // Store the registration options for the next step
+      // In a real implementation, this would trigger the WebAuthn API
+      console.log('Registration options:', data);
+
+      // For now, just show success and hide after a delay
+      setTimeout(() => {
+        hideWidget();
+      }, 2000);
+
+    } else {
+      statusElement.textContent = `❌ Error: ${data.error || 'Unknown error'}`;
+      statusElement.className = 'status-message error';
+    }
+
+  } catch (error) {
+    statusElement.textContent = `❌ Network Error: ${error.message}`;
+    statusElement.className = 'status-message error';
+    console.error('Login error:', error);
+  }
 }
 
 function initializeMensaheWidget() {
@@ -37,7 +83,7 @@ function initializeMensaheWidget() {
 
   // --- Get Icon URL ---
   const iconUrl = chrome.runtime.getURL('assets/mensahe-logo.svg');
-  
+
   // --- Configure Launcher ---
   launcher.innerHTML = `<img src="${iconUrl}" alt="Mensahe">`;
   launcher.style.display = 'flex'; // Show launcher by default
@@ -96,7 +142,7 @@ function initializeMensaheWidget() {
     // Make sure to remove the listener when the widget is hidden.
     document.removeEventListener('click', handleClickOutside);
   };
-  
+
   launcher.addEventListener('click', showWidget);
 
   // Use event delegation for clicks inside the widget
@@ -108,8 +154,16 @@ function initializeMensaheWidget() {
       hideWidget();
     } else if (target.matches('#login-button')) {
       const usernameInput = shadowRoot.getElementById('username');
-      console.log(`Simulating login for: ${usernameInput.value}`);
-      hideWidget(); // Hide after "login"
+      const username = usernameInput.value.trim();
+
+      if (!username) {
+        const statusElement = shadowRoot.getElementById('status-message');
+        statusElement.textContent = 'Please enter a username';
+        statusElement.className = 'status-message error';
+        return;
+      }
+
+      handleLogin(username, shadowRoot);
     }
   });
 
@@ -134,4 +188,4 @@ function initializeMensaheWidget() {
 // --- Main Execution ---
 if (!document.getElementById(WIDGET_CONTAINER_ID)) {
   initializeMensaheWidget();
-} 
+}
