@@ -13,11 +13,11 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Mensahe - Connect with Your Forest of Friends">
     <meta name="twitter:description" content="Mensahe is a secure peer-to-peer messaging app with end-to-end encryption. Create unique 2D character personas and join exclusive communities with truly private conversations.">
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-    
+
     <style>
         :root {
             --bg-dark-forest: #2F3D34;
@@ -132,7 +132,7 @@
         .hero {
             padding: 5rem 0 6rem;
             text-align: center;
-            background: linear-gradient(170deg, rgba(132, 169, 140, 0.3) 0%, rgba(47, 61, 52, 0.8) 70%), 
+            background: linear-gradient(170deg, rgba(132, 169, 140, 0.3) 0%, rgba(47, 61, 52, 0.8) 70%),
                         url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><defs><pattern id="sunlight" patternUnits="userSpaceOnUse" width="300" height="300"><g transform="translate(50,50) scale(1)"><path d="M 0 50 L 50 0 L 100 50 Z" fill="rgba(252, 228, 156, 0.05)"/></g></pattern></defs><rect width="100%" height="100%" fill="url(%23sunlight)"/></svg>');
             position: relative;
             overflow: hidden;
@@ -457,7 +457,7 @@
     <section class="hero">
         <div class="container">
             <h1>A Cozy Corner of the Internet</h1>
-            <p>Step into Mensahe, a cozy corner of the internet where you can connect with friends and communities through secure peer-to-peer messaging. Inspired by nature and the magic of connection, your messages travel directly between devices with end-to-end encryption. Create unique 2D character personas and explore exclusive communities where each user can only journey once.</p>
+            <p>Connect with friends and communities through secure peer-to-peer messaging. Inspired by nature and the magic of connection, your messages travel directly between devices with end-to-end encryption. Create unique 2D character personas and explore exclusive communities where each user can journey.</p>
             <div class="hero-buttons">
                 <a href="#waitlist" class="cta-button">Join the Waitlist</a>
             </div>
@@ -519,7 +519,7 @@
             <p style="text-align: center; margin-bottom: 2rem; color: var(--text-parchment); opacity: 0.9; font-size: 1.1rem; max-width: 600px; margin-left: auto; margin-right: auto;">
                 Be among the first to experience truly private, peer-to-peer messaging with customizable personas. Your conversations will be secure by design.
             </p>
-            
+
             <form class="waitlist-form" id="waitlistForm">
                 <div class="form-group">
                     <label for="email">Your Trail Name (Email)</label>
@@ -544,32 +544,32 @@
         // Waitlist form functionality
         document.getElementById('waitlistForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-            
+
             const email = document.getElementById('email').value.trim();
             const submitButton = document.getElementById('submitButton');
             const messageDiv = document.getElementById('message');
-            
+
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(email)) {
                 showMessage('Please enter a valid email address.', 'error');
                 return;
             }
-            
+
             submitButton.disabled = true;
             submitButton.textContent = 'Joining...';
-            
+
             try {
                 await new Promise(resolve => setTimeout(resolve, 1000));
-                
+
                 const waitlist = JSON.parse(localStorage.getItem('mensahe_waitlist') || '[]');
                 if (!waitlist.includes(email)) {
                     waitlist.push(email);
                     localStorage.setItem('mensahe_waitlist', JSON.stringify(waitlist));
                 }
-                
+
                 showMessage('🎉 Welcome, adventurer! We\'ll send a message when the path is open.', 'success');
                 document.getElementById('email').value = '';
-                
+
             } catch (error) {
                 showMessage('A mischievous spirit blocked the path. Please try again.', 'error');
             } finally {
@@ -577,15 +577,15 @@
                 submitButton.textContent = 'Join the Waitlist';
             }
         });
-        
+
         function showMessage(text, type) {
             const messageDiv = document.getElementById('message');
             messageDiv.className = type === 'success' ? 'success-message' : 'error-message';
             messageDiv.textContent = text;
-            
+
             messageDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
-        
+
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
