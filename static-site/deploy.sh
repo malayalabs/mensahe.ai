@@ -56,9 +56,9 @@ if [ "$GIT_URL" = "git@github.com:YOUR_USERNAME/YOUR_REPO.git" ]; then
     echo "git remote add origin $GIT_URL"
 else
     echo "This command will overwrite the history of the '$TARGET_BRANCH' branch on '$GIT_URL'."
-    # In a real scenario, you would uncomment the following line:
-    # git push -f $GIT_URL HEAD:$TARGET_BRANCH
-    echo "✅ SIMULATION: git push -f $GIT_URL HEAD:$TARGET_BRANCH"
+    # The push command is now active.
+    git push -f $GIT_URL HEAD:$TARGET_BRANCH
+    echo "✅ Successfully pushed to the '$TARGET_BRANCH' branch."
 fi
 
 # Navigate back to the project root
