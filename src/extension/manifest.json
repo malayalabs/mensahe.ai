@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Mensahe Chat Widget",
   "version": "1.0.0",
-  "description": "A secure peer-to-peer messaging system",
+  "description": "A cozy corner of the internet - secure peer-to-peer messaging with nature-inspired design",
   "permissions": [
     "storage",
     "activeTab",
@@ -40,8 +40,7 @@
     {
       "resources": [
         "content.css",
-        "assets/icons/*.png",
-        "assets/mensahe-logo.svg"
+        "assets/*"
       ],
       "matches": ["<all_urls>"]
     }

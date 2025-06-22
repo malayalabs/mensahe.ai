@@ -16,7 +16,7 @@ function getLoginHTML(iconUrl) {
         <img src="${iconUrl}" alt="Mensahe Logo" class="logo">
         <h1>Mensahe</h1>
       </div>
-      <p>A secure peer-to-peer messaging system.</p>
+      <p>🌲 A cozy corner of the internet</p>
       <div class="input-group">
         <label for="username">Enter your name</label>
         <input type="text" id="username" name="username" placeholder="e.g., Jane Doe" />
@@ -174,12 +174,12 @@ function initializeMensaheWidget() {
 
   const launcher = document.createElement('button');
   launcher.id = LAUNCHER_ID;
+  launcher.classList.add('mensahe-launcher-icon'); // Add class for styling
 
-  // --- Get Icon URL ---
+  // --- Get Icon URL for the widget's inner HTML ---
   const iconUrl = chrome.runtime.getURL('assets/mensahe-logo.svg');
-
+  
   // --- Configure Launcher ---
-  launcher.innerHTML = `<img src="${iconUrl}" alt="Mensahe">`;
   launcher.style.display = 'flex'; // Show launcher by default
   document.body.appendChild(launcher);
 
@@ -192,11 +192,7 @@ function initializeMensaheWidget() {
     height: '500px',
     zIndex: '9999',
     display: 'none', // Start hidden
-    borderRadius: '3px',
-    overflow: 'hidden',
-    border: '1px solid #000000',
-    boxShadow: '5px 5px 0px 0px rgba(0,0,0,1)',
-    backgroundColor: '#ffffff',
+    overflow: 'hidden' // Keep overflow hidden for border-radius
   });
 
   // --- Create the shadow DOM ---

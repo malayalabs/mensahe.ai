@@ -1,73 +1,93 @@
 body {
   margin: 0;
-  font-family: 'Verdana', Geneva, sans-serif;
+  font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   font-size: 14px;
-  background-color: #EDE8F4;
+  background-color: #2F3D34;
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><g fill="%233c4a40" fill-opacity="0.4"><circle fill-opacity="0.3" cx="50" cy="50" r="50"/><circle cx="0" cy="50" r="50"/><circle cx="100" cy="50" r="50"/><circle cx="50" cy="0" r="50"/><circle cx="50" cy="100" r="50"/></g></svg>');
   width: 280px;
+  color: #F4F1DE;
 }
 
 #popup-root {
   display: flex;
   flex-direction: column;
-  padding: 12px;
+  padding: 16px;
   min-height: 200px;
   box-sizing: border-box;
+  background: rgba(47, 61, 52, 0.85);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(132, 169, 140, 0.3);
+  border-radius: 12px;
 }
 
 header {
   text-align: center;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 header .logo {
   width: 48px;
   height: 48px;
   margin-bottom: 8px;
+  transition: transform 0.3s ease;
+}
+
+header .logo:hover {
+  transform: rotate(-10deg) scale(1.1);
 }
 
 header h1 {
   font-size: 1.5rem;
-  color: #500078;
+  font-weight: 700;
+  color: #84a98c;
   margin: 0 0 4px 0;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
 }
 
 header p {
-  color: #585858;
+  color: #F4F1DE;
   margin: 0;
   font-size: 0.8rem;
+  opacity: 0.9;
 }
 
 main {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 12px;
 }
 
 button {
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   margin: 4px 0;
-  background: linear-gradient(to bottom, #FCFCFC, #E8E8E8);
-  color: #000000;
-  border: 1px solid #500078;
-  border-radius: 4px;
-  font-weight: bold;
+  background: #C08552;
+  color: #F4F1DE;
+  border: 1px solid rgba(244, 241, 222, 0.2);
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.9rem;
   cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 button:hover {
-  background: linear-gradient(to bottom, #FFFFFF, #F0F0F0);
+  transform: translateY(-2px);
+  background: #D98C6B;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .popup-footer {
   margin-top: auto;
-  padding-top: 12px;
-  border-top: 1px solid #D1C6DD;
+  padding-top: 16px;
+  border-top: 1px solid rgba(132, 169, 140, 0.3);
   text-align: center;
 }
 
 .popup-footer p {
   margin: 0;
   font-size: 0.75rem;
-  color: #606060;
+  color: #F4F1DE;
+  opacity: 0.8;
 } 
