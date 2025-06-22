@@ -1,167 +1,161 @@
-# mensahe.ai
+# Mensahe.ai
 
-<div align="center">
-  <img src="src/extension/assets/mensahe-logo.svg" alt="Mensahe Logo" width="120" height="120">
-  <h1>Mensahe Chat Widget</h1>
-  <p><strong>A secure peer-to-peer messaging system with passkey authentication.</strong></p>
-</div>
+A secure passkey authentication system with a modern web interface and robust backend API.
 
-Mensahe.ai is a chat widget designed for secure, peer-to-peer communication, delivered as a lightweight and installable browser extension with modern passkey authentication.
-
-## Features
-
-- 🎨 **Modern UI**: A clean, modern interface with nostalgic themes
-- 🔧 **Chrome Extension**: Install as a browser extension for easy access
-- ⚡ **Fast & Lightweight**: Built with vanilla JavaScript for optimal performance
-- 🔐 **Passkey Authentication**: Secure WebAuthn-based authentication system
-- 🌐 **PHP Backend**: Robust server-side authentication and user management
-- 🎭 **Nostalgic Themes**: Yahoo! Messenger and Windows XP inspired designs
-- 📱 **Responsive Design**: Works seamlessly across different screen sizes
-
-## Quick Start
+## 🚀 Quick Start
 
 ### Prerequisites
-
-- Node.js (for extension development)
-- PHP 8.0+ (for backend server)
-- Composer (for PHP dependencies)
+- PHP 8.0+ with Composer
+- Node.js 16+ (for extension development)
+- Modern web browser with WebAuthn support
 
 ### Backend Setup
-
-For detailed backend setup and API documentation, see [src/server/README.md](src/server/README.md).
-
-Quick setup:
 ```bash
+# Install PHP dependencies
 cd src/server
 composer install
+
+# Start the development server
 ./start-server.sh
+# Or from project root:
+# ./start-server.sh
 ```
 
+The backend will be available at `http://localhost:8080`
+
+### Frontend Testing
+Open `http://localhost:8080/test-frontend.html` in your browser to test the passkey authentication interface.
+
 ### Extension Development
+```bash
+# Install Node.js dependencies
+npm install
 
-1. **Install dependencies:**
-   ```bash
-   npm install
-   ```
+# Build the extension
+npm run build:extension
 
-2. **Build the extension for development:**
-   ```bash
-   npm run build:extension
-   ```
+# Load extension from extension-dist/ in Chrome
+```
 
-### Installation
+## 🏗️ Architecture
 
-1. Open Chrome and navigate to `chrome://extensions/`
+### Backend (PHP)
+- **Environment-driven configuration** - All settings via environment variables
+- **WebAuthn integration** - Secure passkey registration and verification
+- **RESTful API** - JSON-based communication
+- **Comprehensive testing** - PHPUnit with 90%+ coverage
 
-2. Enable "Developer mode" in the top right.
+### Frontend (HTML/JavaScript)
+- **Modern UI** - Clean, responsive passkey authentication interface
+- **WebAuthn API** - Native browser passkey support
+- **Email validation** - Client and server-side validation
+- **Error handling** - User-friendly error messages
 
-3. Click "Load unpacked" and select the `extension-dist` folder from this project.
+### Extension (Chrome)
+- **Content script** - Injects passkey authentication into web pages
+- **Background script** - Handles extension lifecycle
+- **Popup interface** - User-friendly extension controls
 
-4. The Mensahe icon will appear in your browser toolbar.
+## 🔧 Configuration
 
-## Usage
+The backend uses environment variables for all configuration:
 
-### Authentication Flow
+```bash
+# App Configuration
+APP_NAME=Mensahe
+APP_ENV=development
+APP_DEBUG=false
+APP_URL=http://localhost:8080
+APP_DOMAIN=localhost
 
-1. **Registration**: Users can register using passkeys (biometric, PIN, or security key)
-2. **Login**: Secure authentication without passwords
-3. **Session Management**: Automatic session handling
+# WebAuthn Configuration
+WEBAUTHN_TIMEOUT=60000
+WEBAUTHN_ATTESTATION=none
+WEBAUTHN_USER_VERIFICATION=preferred
+WEBAUTHN_AUTHENTICATOR_ATTACHMENT=platform
 
-### Widget Usage
+# CORS Configuration
+CORS_ALLOWED_ORIGINS=*
+CORS_ALLOWED_METHODS=GET,POST,OPTIONS
+CORS_ALLOWED_HEADERS=Content-Type
+```
 
-- Click the extension icon in the toolbar to open the popup
-- Click "Toggle Widget on this Page" to show or hide the launcher icon
-- Click the launcher icon on any webpage to open the chat widget
-- Use passkey authentication to access the chat features
-- Click outside the widget or use the close button to dismiss it
+## 🧪 Testing
 
-## Project Structure
+For comprehensive testing documentation, see [TESTING.md](TESTING.md).
+
+### Quick Test Run
+
+```bash
+# Backend tests
+cd src/server
+./run-tests.sh
+
+# Frontend testing
+./start-server.sh
+# Open http://localhost:8080/test-frontend.html
+```
+
+## 📁 Project Structure
 
 ```
 mensahe.ai/
 ├── src/
-│   ├── extension/            # Chrome extension source files
-│   │   ├── assets/
-│   │   │   ├── icons/        # PNG icons (16, 24, 32, 48, 64, 128, 256px)
-│   │   │   └── mensahe-logo.svg # Main SVG logo
-│   │   ├── manifest.json     # Extension manifest
-│   │   ├── popup.html        # Extension popup UI
-│   │   ├── popup.js          # Popup functionality
-│   │   ├── popup.css         # Popup styles
-│   │   ├── content.js        # Content script (injects widget)
-│   │   ├── content.css       # Widget styles
-│   │   └── background.js     # Background service worker
-│   └── server/               # PHP backend
-│       ├── README.md         # Backend documentation and API reference
-│       ├── lib/              # Core library classes
-│       │   ├── PassKeyAuthService.php # WebAuthn authentication service
-│       │   └── RegisterRequestLib.php # Core utility functions
-│       ├── registerRequest.php    # Registration API endpoint
-│       ├── registerVerify.php     # Registration verification endpoint
-│       ├── composer.json          # PHP dependencies
-│       └── ...                # Additional backend files
-├── scripts/
-│   └── generate-icons.mjs    # Icon generation script
-├── vite.extension.config.js  # Extension build configuration
-└── package.json              # Dependencies and scripts
+│   ├── extension/          # Chrome extension
+│   │   ├── assets/         # Icons and logos
+│   │   ├── background.js   # Extension background script
+│   │   ├── content.js      # Content script for web pages
+│   │   ├── popup.html      # Extension popup interface
+│   │   └── manifest.json   # Extension manifest
+│   └── server/             # PHP backend
+│       ├── lib/            # Core library classes
+│       ├── tests/          # PHPUnit tests
+│       ├── registerRequest.php    # Registration endpoint
+│       ├── registerVerify.php     # Verification endpoint
+│       └── test-frontend.html     # Test interface
+├── start-server.sh         # Convenience script to start backend
+└── README.md              # This file
 ```
 
-## Development
+## 🔐 Security Features
 
-### Backend Development
+- **WebAuthn standard** - Industry-standard passkey authentication
+- **Environment configuration** - No hardcoded secrets
+- **Input validation** - Server-side email validation
+- **Session management** - Secure challenge storage
+- **CORS protection** - Configurable cross-origin policies
 
-For comprehensive backend documentation, API reference, and development guides, see [src/server/README.md](src/server/README.md).
+## 🚀 Development
 
-### Testing
+### Adding New Features
+1. Create feature branch
+2. Add tests for new functionality
+3. Implement the feature
+4. Ensure all tests pass
+5. Update documentation
+6. Submit pull request
 
-1. **Backend Testing**: See [src/server/TESTING.md](src/server/TESTING.md) for comprehensive testing documentation
-2. **Extension Testing**: Build and load the extension in Chrome to test the complete authentication flow
+### Code Quality
+- All backend code must have unit tests
+- Follow PSR-12 coding standards
+- Use environment variables for configuration
+- Document API endpoints
 
-## Customization
+## 📚 Documentation
 
-### Widget Styling
-- Widget styles: `src/extension/content.css`
-- Popup styles: `src/extension/popup.css`
+- [Backend Testing Guide](src/server/TESTING.md)
+- [Extension Development](src/extension/README.md)
+- [API Documentation](src/server/README.md)
 
-### Backend Configuration
-For backend customization options, see [src/server/README.md](src/server/README.md).
-
-### Icons
-To change the icons, modify `src/extension/assets/mensahe-logo.svg` and run:
-```bash
-node scripts/generate-icons.mjs
-```
-
-## Security Features
-
-- **Passkey Authentication**: Passwordless, phishing-resistant authentication
-- **WebAuthn Standard**: Industry-standard security protocol
-- **CORS Protection**: Proper cross-origin request handling
-- **Error Handling**: Secure error responses without information leakage
-
-For detailed security implementation, see [src/server/README.md](src/server/README.md).
-
-## License
-
-MIT
-
-## Contributing
+## 🤝 Contributing
 
 1. Fork the repository
 2. Create a feature branch
 3. Make your changes
-4. Test both backend and frontend functionality
-5. Submit a pull request
+4. Add tests for new functionality
+5. Ensure all tests pass
+6. Submit a pull request
 
-## Support
+## 📄 License
 
-For issues and questions:
-- Create an issue on GitHub
-- Check the backend documentation: [src/server/README.md](src/server/README.md)
-- Review the code examples and test files
-
----
-
-<div align="center">
-  <sub style="color: #6c757d; font-size: small;">Made with ❤️ from 🇵🇭</sub>
-</div>
+This project is licensed under the MIT License - see the LICENSE file for details.

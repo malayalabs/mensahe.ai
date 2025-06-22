@@ -3,104 +3,227 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mensahe Backend Test</title>
+    <title>Mensahe - Passkey Authentication</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 500px;
             margin: 0 auto;
             padding: 20px;
-            background-color: #f5f5f5;
+            background-color: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
         }
         .container {
             background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            width: 100%;
+        }
+        .logo {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        .logo h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a202c;
+            margin: 0;
+        }
+        .logo p {
+            color: #718096;
+            margin: 8px 0 0 0;
+            font-size: 16px;
         }
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 24px;
         }
         label {
             display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 16px;
-        }
-        button {
-            background: #007bff;
-            color: white;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        button:hover {
-            background: #0056b3;
-        }
-        .result {
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 4px;
-            white-space: pre-wrap;
-            font-family: monospace;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2d3748;
             font-size: 14px;
         }
+        input[type="text"], input[type="email"] {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.2s;
+            box-sizing: border-box;
+        }
+        input[type="text"]:focus, input[type="email"]:focus {
+            outline: none;
+            border-color: #4299e1;
+        }
+        .btn {
+            width: 100%;
+            padding: 14px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.2s;
+            margin-bottom: 16px;
+        }
+        .btn-primary {
+            background: #4299e1;
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #3182ce;
+            transform: translateY(-1px);
+        }
+        .btn-secondary {
+            background: transparent;
+            color: #4299e1;
+            border: 2px solid #e2e8f0;
+        }
+        .btn-secondary:hover {
+            background: #f7fafc;
+            border-color: #4299e1;
+        }
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .result {
+            margin-top: 24px;
+            padding: 16px;
+            border-radius: 8px;
+            white-space: pre-wrap;
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+            font-size: 13px;
+            line-height: 1.5;
+        }
         .success {
-            background: #d4edda;
-            border: 1px solid #c3e6cb;
-            color: #155724;
+            background: #f0fff4;
+            border: 1px solid #9ae6b4;
+            color: #22543d;
         }
         .error {
-            background: #f8d7da;
-            border: 1px solid #f5c6cb;
-            color: #721c24;
+            background: #fed7d7;
+            border: 1px solid #feb2b2;
+            color: #742a2a;
         }
         .loading {
-            background: #fff3cd;
-            border: 1px solid #ffeaa7;
-            color: #856404;
+            background: #fef5e7;
+            border: 1px solid #fbd38d;
+            color: #744210;
+        }
+        .divider {
+            text-align: center;
+            margin: 24px 0;
+            position: relative;
+        }
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #e2e8f0;
+        }
+        .divider span {
+            background: white;
+            padding: 0 16px;
+            color: #718096;
+            font-size: 14px;
+        }
+        .signin-link {
+            text-align: center;
+            margin-top: 16px;
+        }
+        .signin-link a {
+            color: #4299e1;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .signin-link a:hover {
+            text-decoration: underline;
+        }
+        .hidden {
+            display: none;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🧪 Mensahe Backend Test</h1>
-        <p>This page tests the communication between the frontend and the PHP backend.</p>
-
-        <div class="form-group">
-            <label for="username">Username:</label>
-            <input type="text" id="username" placeholder="Enter username (e.g., test@example.com)" value="test@example.com">
+        <div class="logo">
+            <h1>🔐 Mensahe</h1>
+            <p>Secure passkey authentication</p>
         </div>
 
-        <button onclick="testRegistration()">Test Registration Endpoint</button>
+        <div id="registration-form">
+            <div class="form-group">
+                <label for="username">Email address</label>
+                <input type="email" id="username" placeholder="Enter your email address" value="test@example.com">
+            </div>
+
+            <button class="btn btn-primary" onclick="registerWithPasskey()" id="register-btn">
+                Register with passkey
+            </button>
+
+            <div class="divider">
+                <span>or</span>
+            </div>
+
+            <button class="btn btn-secondary" onclick="showSignIn()">
+                Already have a passkey? Sign-in
+            </button>
+        </div>
+
+        <div id="signin-form" class="hidden">
+            <div class="form-group">
+                <label for="signin-username">Email address</label>
+                <input type="email" id="signin-username" placeholder="Enter your email address" value="test@example.com">
+            </div>
+
+            <button class="btn btn-primary" onclick="signInWithPasskey()" id="signin-btn">
+                Sign in with passkey
+            </button>
+
+            <div class="divider">
+                <span>or</span>
+            </div>
+
+            <button class="btn btn-secondary" onclick="showRegistration()">
+                Don't have a passkey? Register
+            </button>
+        </div>
 
         <div id="result"></div>
     </div>
 
     <script>
-        async function testRegistration() {
+        async function registerWithPasskey() {
             const resultDiv = document.getElementById('result');
+            const registerBtn = document.getElementById('register-btn');
             const username = document.getElementById('username').value.trim();
 
             if (!username) {
-                resultDiv.className = 'result error';
-                resultDiv.textContent = 'Please enter a username';
+                showResult('Please enter your email address', 'error');
                 return;
             }
 
-            resultDiv.className = 'result loading';
-            resultDiv.textContent = 'Testing registration endpoint...';
+            if (!isValidEmail(username)) {
+                showResult('Please enter a valid email address', 'error');
+                return;
+            }
+
+            registerBtn.disabled = true;
+            registerBtn.textContent = 'Creating passkey...';
+            showResult('Requesting registration options...', 'loading');
 
             try {
-                const response = await fetch('http://localhost:8080/registeRequest.php', {
+                const response = await fetch('http://localhost:8080/registerRequest.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -111,28 +234,83 @@
                 const data = await response.json();
 
                 if (response.ok) {
-                    resultDiv.className = 'result success';
-                    resultDiv.textContent = `✅ Success! Registration options received:\n\n` +
-                        `Challenge: ${data.challenge}\n` +
+                    showResult(`✅ Registration options received!\n\n` +
+                        `Challenge: ${data.challenge.substring(0, 20)}...\n` +
                         `Relying Party: ${data.rp.name}\n` +
-                        `User ID: ${data.user.id}\n` +
-                        `User Name: ${data.user.name}\n` +
-                        `Timeout: ${data.timeout}\n` +
-                        `Attestation: ${data.attestation}`;
+                        `User: ${data.user.name}\n` +
+                        `Timeout: ${data.timeout}ms\n\n` +
+                        `Next: Create credential with WebAuthn API`, 'success');
                 } else {
-                    resultDiv.className = 'result error';
-                    resultDiv.textContent = `❌ Error: ${data.error || 'Unknown error'}`;
+                    showResult(`❌ Registration failed: ${data.error || 'Unknown error'}`, 'error');
                 }
             } catch (error) {
-                resultDiv.className = 'result error';
-                resultDiv.textContent = `❌ Network Error: ${error.message}\n\n` +
-                    `Make sure the PHP server is running on localhost:8080`;
+                showResult(`❌ Network Error: ${error.message}\n\n` +
+                    `Make sure the PHP server is running on localhost:8080`, 'error');
+            } finally {
+                registerBtn.disabled = false;
+                registerBtn.textContent = 'Register with passkey';
             }
+        }
+
+        async function signInWithPasskey() {
+            const resultDiv = document.getElementById('result');
+            const signinBtn = document.getElementById('signin-btn');
+            const username = document.getElementById('signin-username').value.trim();
+
+            if (!username) {
+                showResult('Please enter your email address', 'error');
+                return;
+            }
+
+            if (!isValidEmail(username)) {
+                showResult('Please enter a valid email address', 'error');
+                return;
+            }
+
+            signinBtn.disabled = true;
+            signinBtn.textContent = 'Signing in...';
+            showResult('Sign-in functionality coming soon...', 'loading');
+
+            // TODO: Implement sign-in with passkey
+            setTimeout(() => {
+                showResult('Sign-in endpoint not yet implemented', 'error');
+                signinBtn.disabled = false;
+                signinBtn.textContent = 'Sign in with passkey';
+            }, 1000);
+        }
+
+        function showRegistration() {
+            document.getElementById('registration-form').classList.remove('hidden');
+            document.getElementById('signin-form').classList.add('hidden');
+            clearResult();
+        }
+
+        function showSignIn() {
+            document.getElementById('registration-form').classList.add('hidden');
+            document.getElementById('signin-form').classList.remove('hidden');
+            clearResult();
+        }
+
+        function showResult(message, type) {
+            const resultDiv = document.getElementById('result');
+            resultDiv.className = `result ${type}`;
+            resultDiv.textContent = message;
+        }
+
+        function clearResult() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.textContent = '';
+            resultDiv.className = '';
+        }
+
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
         }
 
         // Auto-test on page load
         window.addEventListener('load', () => {
-            console.log('Mensahe Backend Test Page Loaded');
+            console.log('Mensahe Passkey Authentication Page Loaded');
             console.log('Make sure to start the PHP server with: php -S localhost:8080');
         });
     </script>

@@ -28,8 +28,8 @@ class RegisterRequestLib
     public static function validateUsername(array $data): string
     {
         $username = isset($data['username']) ? trim($data['username']) : '';
-        if (empty($username) || !preg_match('/^[a-zA-Z0-9_\-]{3,32}$/', $username)) {
-            throw new \Exception('Invalid username');
+        if (empty($username) || !preg_match('/^[^\s@]+@[^\s@]+\.[^\s@]+$/', $username)) {
+            throw new \Exception('Invalid email address');
         }
         return $username;
     }

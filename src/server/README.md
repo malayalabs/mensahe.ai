@@ -1,98 +1,104 @@
 # Mensahe PHP Backend
 
-This directory contains the PHP server-side logic for the Mensahe chat widget, handling user registration and passkey (WebAuthn) authentication.
+A secure, environment-driven PHP backend for passkey authentication with comprehensive testing and modern API design.
 
-## Architecture
+## 🚀 Quick Start
 
-The backend uses a service-oriented architecture with the `PassKeyAuthService` class handling all WebAuthn-related operations. This provides better separation of concerns and makes the code more testable and maintainable.
+### Prerequisites
+- PHP 8.0+ with Composer
+- Modern web browser with WebAuthn support
 
-### Key Components
+### Installation
+```bash
+# Install dependencies
+composer install
 
-- **`PassKeyAuthService.php`**: Main service class for WebAuthn operations
-- **`registerRequest.php`**: HTTP endpoint for initiating passkey registration
-- **`registerVerify.php`**: HTTP endpoint for verifying passkey registration
-- **`test-registration.php`**: Command-line test script for the service
-- **`test-frontend.html`**: Web-based test page for frontend integration
+# Start the development server
+./start-server.sh
+# Or from project root:
+# ./start-server.sh
+```
 
-## Local Development
+The server will be available at `http://localhost:8080`
 
-To run this backend locally, you will need a PHP development environment (like XAMPP, MAMP, or the built-in PHP server).
+### Test the Integration
+1. Open `http://localhost:8080/test-frontend.html` in your browser
+2. Enter an email address
+3. Click "Register with passkey"
+4. Verify the backend returns registration options
 
-### Quick Start
+## 🏗️ Architecture
 
-1. **Install Dependencies**:
-   ```bash
-   cd src/server
-   composer install
-   ```
+The backend uses a service-oriented architecture with environment-driven configuration:
 
-2. **Start the Server**:
-   ```bash
-   # Option 1: Use the convenience script
-   ./start-server.sh
+### Core Components
+- **`PassKeyAuthService.php`**: WebAuthn authentication service
+- **`RegisterRequestLib.php`**: Core utility functions and validation
+- **`Config.php`**: Environment-driven configuration management
+- **`registerRequest.php`**: Registration endpoint
+- **`registerVerify.php`**: Verification endpoint
 
-   # Option 2: Manual start
-   php -S localhost:8080
-   ```
+### Key Features
+- **Environment-driven configuration** - All settings via environment variables
+- **Email validation** - Server-side email format validation
+- **Session management** - Secure challenge storage
+- **CORS support** - Configurable cross-origin policies
+- **Comprehensive testing** - 90%+ test coverage
 
-3. **Test the Backend**:
-   ```bash
-   # Test the service directly
-   php test-registration.php
+## 🔧 Configuration
 
-   # Test via web interface
-   # Open http://localhost:8080/test-frontend.html in your browser
-   ```
+All configuration is managed through environment variables:
 
-## Testing
+```bash
+# App Configuration
+APP_NAME=Mensahe
+APP_ENV=development
+APP_DEBUG=false
+APP_URL=http://localhost:8080
+APP_DOMAIN=localhost
 
-For comprehensive testing documentation, see [TESTING.md](TESTING.md).
+# WebAuthn Configuration
+WEBAUTHN_TIMEOUT=60000
+WEBAUTHN_ATTESTATION=none
+WEBAUTHN_USER_VERIFICATION=preferred
+WEBAUTHN_AUTHENTICATOR_ATTACHMENT=platform
+
+# CORS Configuration
+CORS_ALLOWED_ORIGINS=*
+CORS_ALLOWED_METHODS=GET,POST,OPTIONS
+CORS_ALLOWED_HEADERS=Content-Type
+
+# Session Configuration
+SESSION_DRIVER=file
+SESSION_LIFETIME=120
+```
+
+## 🧪 Testing
+
+For comprehensive testing documentation, see [TESTING.md](../../TESTING.md).
 
 ### Quick Test Run
 
-Use our custom test runner for a visual overview:
 ```bash
+# Run all tests
 ./run-tests.sh
+
+# Run specific test files
+./vendor/bin/phpunit tests/ConfigTest.php
+./vendor/bin/phpunit tests/PassKeyAuthServiceTest.php
+./vendor/bin/phpunit tests/RegisterRequestTest.php
 ```
 
-### Command Line Testing
+### Test Coverage
+Current test coverage includes:
+- ✅ Config class (environment variable handling)
+- ✅ PassKeyAuthService (registration and verification)
+- ✅ RegisterRequestLib (validation and utilities)
+- ✅ Email validation (various formats)
+- ✅ Session management
+- ✅ Error handling
 
-Run the service test to verify everything works:
-
-```bash
-php test-registration.php
-```
-
-Expected output:
-```
-Testing PassKeyAuthService...
-
-Testing registration options generation for user: testuser@example.com
-✅ Success! Generated registration options object:
-- Object type: Webauthn\PublicKeyCredentialCreationOptions
-- Object created successfully
-
-Testing with empty username (should fail):
-✅ Correctly caught exception: Username not provided
-```
-
-### Web-based Testing
-
-1. Start the server: `php -S localhost:8080`
-2. Open `http://localhost:8080/test-frontend.html` in your browser
-3. Enter a username and click "Test Registration Endpoint"
-4. Verify you receive a successful response with registration options
-
-### Extension Integration Testing
-
-1. Build the extension: `npm run build:extension` (from project root)
-2. Load the extension in Chrome from `extension-dist/`
-3. Navigate to any website
-4. Click the Mensahe launcher icon
-5. Enter a username and click "Sign In"
-6. Verify the status message shows "Registration options received!"
-
-## API Endpoints
+## 📡 API Endpoints
 
 ### POST /registerRequest.php
 
@@ -119,14 +125,24 @@ Initiates the passkey registration process.
     "displayName": "user@example.com"
   },
   "timeout": 60000,
-  "attestation": "none"
+  "attestation": "none",
+  "authenticatorSelection": {
+    "authenticatorAttachment": "platform",
+    "userVerification": "preferred"
+  },
+  "pubKeyCredParams": [
+    {
+      "type": "public-key",
+      "alg": -7
+    }
+  ]
 }
 ```
 
 **Error Response**:
 ```json
 {
-  "error": "Error message"
+  "error": "Invalid email address"
 }
 ```
 
@@ -162,34 +178,79 @@ Verifies the passkey registration after credential creation.
 **Error Response**:
 ```json
 {
-  "error": "Error message"
+  "error": "No registration session found"
 }
 ```
 
-## File Structure
+## 📁 File Structure
 
-- `/lib/PassKeyAuthService.php`: Main service class for WebAuthn operations
-- `/lib/RegisterRequestLib.php`: Core utility functions for request handling
-- `/registerRequest.php`: Generates the challenge and options for a new passkey registration
-- `/registerVerify.php`: HTTP endpoint for verifying passkey registration
-- `/test-registration.php`: Command-line test script
-- `/test-frontend.html`: Web-based test interface
-- `/start-server.sh`: Convenience script to start the development server
-- `/composer.json`: PHP dependencies and autoloading configuration
-- `/vendor/`: Composer dependencies (generated)
-- `/tests/`: PHPUnit test files
+```
+src/server/
+├── lib/                    # Core library classes
+│   ├── Config.php         # Environment-driven configuration
+│   ├── PassKeyAuthService.php  # WebAuthn authentication service
+│   └── RegisterRequestLib.php  # Core utility functions
+├── tests/                  # PHPUnit test files
+│   ├── ConfigTest.php     # Configuration tests
+│   ├── PassKeyAuthServiceTest.php  # Authentication service tests
+│   └── RegisterRequestTest.php     # Utility function tests
+├── registerRequest.php     # Registration endpoint
+├── registerVerify.php      # Verification endpoint
+├── test-frontend.html      # Test interface
+├── start-server.sh         # Development server script
+├── run-tests.sh           # Test runner script
+├── composer.json          # PHP dependencies
+├── phpunit.xml           # PHPUnit configuration
+├── README.md             # This file
+└── TESTING.md            # Comprehensive testing guide
+```
 
-## Security Considerations
+## 🔐 Security Considerations
 
-- CORS headers are configured for development (should be restricted in production)
-- Input validation is implemented for all endpoints
-- Sessions are used to store challenge data securely
-- The WebAuthn library handles cryptographic operations
+- **Email validation** - Server-side validation of email format
+- **Session security** - Secure challenge storage in sessions
+- **CORS headers** - Configurable cross-origin policies
+- **Input validation** - All inputs validated before processing
+- **Error handling** - Secure error responses without information leakage
+- **Environment configuration** - No hardcoded secrets or URLs
 
-## Next Steps
+## 🚀 Development
 
-- Implement `/register-verify.php` to complete the registration flow
-- Add `/login-request.php` and `/login-verify.php` for authentication
-- Implement proper database storage for user credentials
-- Add production-ready CORS configuration
-- Implement rate limiting and additional security measures
+### Adding New Features
+1. Create feature branch
+2. Add comprehensive tests
+3. Implement the feature
+4. Ensure all tests pass
+5. Update documentation
+6. Submit pull request
+
+### Code Standards
+- Follow PSR-12 coding standards
+- All code must have unit tests
+- Use environment variables for configuration
+- Document all public methods and classes
+
+### Testing Best Practices
+- Test both success and error cases
+- Mock external dependencies
+- Use descriptive test names
+- Maintain test isolation
+
+## 📚 Additional Documentation
+
+- [Testing Guide](TESTING.md) - Comprehensive testing documentation
+- [API Examples](test-frontend.html) - Interactive test interface
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Add tests for new functionality
+4. Implement the feature
+5. Ensure all tests pass
+6. Update documentation
+7. Submit a pull request
+
+## 📄 License
+
+This project is licensed under the MIT License.

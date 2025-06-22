@@ -41,6 +41,48 @@ final class RegisterRequestTest extends TestCase
         $this->expectExceptionMessage('Invalid JSON');
         RegisterRequestLib::getRequestData('not-json');
     }
+
+    public function testValidateUsernameValidEmail(): void
+    {
+        $data = ['username' => 'user@example.com'];
+        $result = RegisterRequestLib::validateUsername($data);
+        $this->assertSame('user@example.com', $result);
+    }
+
+    public function testValidateUsernameValidEmailWithSubdomain(): void
+    {
+        $data = ['username' => 'user@sub.example.com'];
+        $result = RegisterRequestLib::validateUsername($data);
+        $this->assertSame('user@sub.example.com', $result);
+    }
+
+    public function testValidateUsernameInvalidEmail(): void
+    {
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Invalid email address');
+        RegisterRequestLib::validateUsername(['username' => 'invalid-email']);
+    }
+
+    public function testValidateUsernameInvalidEmailNoAt(): void
+    {
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Invalid email address');
+        RegisterRequestLib::validateUsername(['username' => 'user.example.com']);
+    }
+
+    public function testValidateUsernameInvalidEmailNoDomain(): void
+    {
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Invalid email address');
+        RegisterRequestLib::validateUsername(['username' => 'user@']);
+    }
+
+    public function testValidateUsernameInvalidEmailNoLocalPart(): void
+    {
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Invalid email address');
+        RegisterRequestLib::validateUsername(['username' => '@example.com']);
+    }
 }
 
 // Helper class to mock php://input for testing
