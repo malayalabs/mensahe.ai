@@ -24,8 +24,9 @@ if [ -n "$(git status --porcelain)" ]; then
   # exit 1 # Disabled for local testing flexibility
 fi
 
-# Store the current branch name
+# Store the current branch name and remote URL before changing directories
 CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+GIT_URL=$(git remote get-url origin 2>/dev/null || echo "git@github.com:YOUR_USERNAME/YOUR_REPO.git")
 echo "✅ Current branch is '$CURRENT_BRANCH'"
 
 # Use a temporary directory in the project root for deployment
@@ -45,14 +46,12 @@ git init
 git add -A
 git commit -m 'deploy: Prepare landing page for deployment'
 
-# Check for a remote 'origin'
-GIT_URL=$(git remote get-url origin 2>/dev/null || echo "git@github.com:YOUR_USERNAME/YOUR_REPO.git")
+# Deploy to the gh-pages branch
 TARGET_BRANCH="gh-pages"
-
 echo "✅ Preparing to push to the '$TARGET_BRANCH' branch."
 
 if [ "$GIT_URL" = "git@github.com:YOUR_USERNAME/YOUR_REPO.git" ]; then
-    echo "⚠️  No remote 'origin' found. Skipping push simulation."
+    echo "⚠️  No remote 'origin' found. Skipping push."
     echo "To enable deployment, please add your GitHub repository as a remote:"
     echo "git remote add origin $GIT_URL"
 else
