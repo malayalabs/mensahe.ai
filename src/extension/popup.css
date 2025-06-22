@@ -1,0 +1,73 @@
+body {
+  margin: 0;
+  font-family: 'Verdana', Geneva, sans-serif;
+  font-size: 14px;
+  background-color: #EDE8F4;
+  width: 280px;
+}
+
+#popup-root {
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  min-height: 200px;
+  box-sizing: border-box;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+header .logo {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 8px;
+}
+
+header h1 {
+  font-size: 1.5rem;
+  color: #500078;
+  margin: 0 0 4px 0;
+}
+
+header p {
+  color: #585858;
+  margin: 0;
+  font-size: 0.8rem;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  margin: 4px 0;
+  background: linear-gradient(to bottom, #FCFCFC, #E8E8E8);
+  color: #000000;
+  border: 1px solid #500078;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  background: linear-gradient(to bottom, #FFFFFF, #F0F0F0);
+}
+
+.popup-footer {
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid #D1C6DD;
+  text-align: center;
+}
+
+.popup-footer p {
+  margin: 0;
+  font-size: 0.75rem;
+  color: #606060;
+} 
