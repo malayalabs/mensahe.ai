@@ -10,6 +10,7 @@ The backend uses a service-oriented architecture with the `PassKeyAuthService` c
 
 - **`PassKeyAuthService.php`**: Main service class for WebAuthn operations
 - **`registerRequest.php`**: HTTP endpoint for initiating passkey registration
+- **`registerVerify.php`**: HTTP endpoint for verifying passkey registration
 - **`test-registration.php`**: Command-line test script for the service
 - **`test-frontend.html`**: Web-based test page for frontend integration
 
@@ -44,6 +45,15 @@ To run this backend locally, you will need a PHP development environment (like X
    ```
 
 ## Testing
+
+For comprehensive testing documentation, see [TESTING.md](TESTING.md).
+
+### Quick Test Run
+
+Use our custom test runner for a visual overview:
+```bash
+./run-tests.sh
+```
 
 ### Command Line Testing
 
@@ -120,15 +130,54 @@ Initiates the passkey registration process.
 }
 ```
 
+### POST /registerVerify.php
+
+Verifies the passkey registration after credential creation.
+
+**Request**:
+```json
+{
+  "username": "user@example.com",
+  "credential": {
+    "id": "credential-id",
+    "type": "public-key",
+    "rawId": "base64-encoded-raw-id",
+    "response": {
+      "clientDataJSON": "base64-encoded-client-data",
+      "attestationObject": "base64-encoded-attestation-object"
+    }
+  }
+}
+```
+
+**Response**:
+```json
+{
+  "success": true,
+  "message": "Passkey registration completed successfully",
+  "username": "user@example.com"
+}
+```
+
+**Error Response**:
+```json
+{
+  "error": "Error message"
+}
+```
+
 ## File Structure
 
-- `/PassKeyAuthService.php`: Main service class for WebAuthn operations
+- `/lib/PassKeyAuthService.php`: Main service class for WebAuthn operations
+- `/lib/RegisterRequestLib.php`: Core utility functions for request handling
 - `/registerRequest.php`: Generates the challenge and options for a new passkey registration
+- `/registerVerify.php`: HTTP endpoint for verifying passkey registration
 - `/test-registration.php`: Command-line test script
 - `/test-frontend.html`: Web-based test interface
 - `/start-server.sh`: Convenience script to start the development server
 - `/composer.json`: PHP dependencies and autoloading configuration
 - `/vendor/`: Composer dependencies (generated)
+- `/tests/`: PHPUnit test files
 
 ## Security Considerations
 

@@ -37,6 +37,7 @@ async function handleLogin(username, shadowRoot) {
     statusElement.textContent = 'Connecting to server...';
     statusElement.className = 'status-message loading';
 
+    // Step 1: Get registration options from server
     const response = await fetch(`${BACKEND_URL}/registerRequest.php`, {
       method: 'POST',
       headers: {
@@ -47,29 +48,122 @@ async function handleLogin(username, shadowRoot) {
 
     const data = await response.json();
 
-    if (response.ok) {
-      statusElement.textContent = '✅ Registration options received! Ready for passkey creation.';
+    if (!response.ok) {
+      throw new Error(data.error || 'Server error');
+    }
+
+    statusElement.textContent = 'Creating passkey...';
+    statusElement.className = 'status-message loading';
+
+    // Step 2: Create WebAuthn credential
+    const credential = await createWebAuthnCredential(data, username);
+
+    statusElement.textContent = 'Verifying passkey...';
+    statusElement.className = 'status-message loading';
+
+    // Step 3: Send credential to server for verification
+    const verifyResponse = await fetch(`${BACKEND_URL}/registerVerify.php`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username,
+        credential: {
+          id: credential.id,
+          type: credential.type,
+          rawId: arrayBufferToBase64(credential.rawId),
+          response: {
+            clientDataJSON: arrayBufferToBase64(credential.response.clientDataJSON),
+            attestationObject: arrayBufferToBase64(credential.response.attestationObject),
+          }
+        }
+      })
+    });
+
+    const verifyData = await verifyResponse.json();
+
+    if (verifyResponse.ok) {
+      statusElement.textContent = '✅ Passkey created successfully! You can now sign in securely.';
       statusElement.className = 'status-message success';
 
-      // Store the registration options for the next step
-      // In a real implementation, this would trigger the WebAuthn API
-      console.log('Registration options:', data);
-
-      // For now, just show success and hide after a delay
+      // Store user session or redirect to chat
       setTimeout(() => {
         hideWidget();
-      }, 2000);
+        // TODO: Open chat interface or show success message
+      }, 3000);
 
     } else {
-      statusElement.textContent = `❌ Error: ${data.error || 'Unknown error'}`;
-      statusElement.className = 'status-message error';
+      throw new Error(verifyData.error || 'Verification failed');
     }
 
   } catch (error) {
-    statusElement.textContent = `❌ Network Error: ${error.message}`;
+    statusElement.textContent = `❌ Error: ${error.message}`;
     statusElement.className = 'status-message error';
     console.error('Login error:', error);
   }
+}
+
+async function createWebAuthnCredential(options, username) {
+  // Convert base64 strings back to ArrayBuffer for WebAuthn API
+  const publicKeyOptions = {
+    challenge: base64ToArrayBuffer(options.challenge),
+    rp: options.rp,
+    user: {
+      ...options.user,
+      id: base64ToArrayBuffer(options.user.id)
+    },
+    pubKeyCredParams: options.pubKeyCredParams || [
+      { alg: -7, type: 'public-key' }, // ES256
+      { alg: -257, type: 'public-key' } // RS256
+    ],
+    timeout: options.timeout || 60000,
+    attestation: options.attestation || 'none',
+    authenticatorSelection: options.authenticatorSelection || {
+      authenticatorAttachment: 'platform',
+      userVerification: 'preferred'
+    }
+  };
+
+  try {
+    const credential = await navigator.credentials.create({
+      publicKey: publicKeyOptions
+    });
+
+    return credential;
+  } catch (error) {
+    console.error('WebAuthn creation error:', error);
+    
+    // Provide user-friendly error messages
+    if (error.name === 'NotAllowedError') {
+      throw new Error('Passkey creation was cancelled or not supported by your device');
+    } else if (error.name === 'InvalidStateError') {
+      throw new Error('A passkey already exists for this account');
+    } else if (error.name === 'NotSupportedError') {
+      throw new Error('Your browser or device does not support passkeys');
+    } else {
+      throw new Error(`Passkey creation failed: ${error.message}`);
+    }
+  }
+}
+
+// Utility functions for base64 conversion
+function arrayBufferToBase64(buffer) {
+  const bytes = new Uint8Array(buffer);
+  let binary = '';
+  for (let i = 0; i < bytes.byteLength; i++) {
+    binary += String.fromCharCode(bytes[i]);
+  }
+  return btoa(binary);
+}
+
+function base64ToArrayBuffer(base64) {
+  const binaryString = atob(base64);
+  const bytes = new Uint8Array(binaryString.length);
+  for (let i = 0; i < binaryString.length; i++) {
+    bytes[i] = binaryString.charCodeAt(i);
+  }
+  return bytes.buffer;
 }
 
 function initializeMensaheWidget() {

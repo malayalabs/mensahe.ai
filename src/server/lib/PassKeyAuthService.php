@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Mensahe;
+namespace Mensahe\Lib;
 
 use Webauthn\PublicKeyCredentialCreationOptions;
 use Webauthn\PublicKeyCredentialRpEntity;

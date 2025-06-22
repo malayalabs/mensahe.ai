@@ -93,8 +93,11 @@ mensahe.ai/
 │   │   └── background.js     # Background service worker
 │   └── server/               # PHP backend
 │       ├── README.md         # Backend documentation and API reference
-│       ├── PassKeyAuthService.php # WebAuthn authentication service
+│       ├── lib/              # Core library classes
+│       │   ├── PassKeyAuthService.php # WebAuthn authentication service
+│       │   └── RegisterRequestLib.php # Core utility functions
 │       ├── registerRequest.php    # Registration API endpoint
+│       ├── registerVerify.php     # Registration verification endpoint
 │       ├── composer.json          # PHP dependencies
 │       └── ...                # Additional backend files
 ├── scripts/
@@ -111,7 +114,7 @@ For comprehensive backend documentation, API reference, and development guides, 
 
 ### Testing
 
-1. **Backend Testing**: See [src/server/README.md](src/server/README.md) for detailed testing procedures
+1. **Backend Testing**: See [src/server/TESTING.md](src/server/TESTING.md) for comprehensive testing documentation
 2. **Extension Testing**: Build and load the extension in Chrome to test the complete authentication flow
 
 ## Customization

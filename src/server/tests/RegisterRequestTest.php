@@ -3,15 +3,14 @@
 declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
-
-require_once __DIR__ . '/../RegisterRequestLib.php';
+use Mensahe\Lib\RegisterRequestLib;
 
 final class RegisterRequestTest extends TestCase
 {
     public function testValidateUsernameValid(): void
     {
         $data = ['username' => 'valid_user123'];
-        $result = validateUsername($data);
+        $result = RegisterRequestLib::validateUsername($data);
         $this->assertSame('valid_user123', $result);
     }
 
@@ -19,28 +18,28 @@ final class RegisterRequestTest extends TestCase
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('Invalid username');
-        validateUsername(['username' => '']);
+        RegisterRequestLib::validateUsername(['username' => '']);
     }
 
     public function testValidateUsernameInvalidPattern(): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('Invalid username');
-        validateUsername(['username' => 'ab']);
+        RegisterRequestLib::validateUsername(['username' => 'ab']);
     }
 
     public function testValidateUsernameMissing(): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('Invalid username');
-        validateUsername([]);
+        RegisterRequestLib::validateUsername([]);
     }
 
     public function testGetRequestDataInvalidJson(): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('Invalid JSON');
-        getRequestData('not-json');
+        RegisterRequestLib::getRequestData('not-json');
     }
 }
 
