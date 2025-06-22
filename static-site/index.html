@@ -3,18 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mensahe - Connect Instantly, Stay Connected</title>
-    <meta name="description" content="Experience the next generation of instant messaging with Mensahe. Connect with friends, family, and communities in real-time with secure, private conversations.">
-    <meta name="keywords" content="instant messaging, chat, messaging app, peer-to-peer, social, connect, friends, family, real-time">
-    <meta property="og:title" content="Mensahe - Connect Instantly, Stay Connected">
-    <meta property="og:description" content="Experience the next generation of instant messaging with Mensahe. Connect with friends, family, and communities in real-time.">
+    <title>Mensahe - Connect with Your Forest of Friends</title>
+    <meta name="description" content="Step into Mensahe, a cozy corner of the internet where you can connect with friends and communities. Inspired by nature and the magic of connection.">
+    <meta name="keywords" content="instant messaging, chat, messaging app, ghibli, cozy, social, connect, friends, community, nature">
+    <meta property="og:title" content="Mensahe - Connect with Your Forest of Friends">
+    <meta property="og:description" content="Step into Mensahe, a cozy corner of the internet where you can connect with friends and communities.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://mensahe.ai">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Mensahe - Connect Instantly, Stay Connected">
-    <meta name="twitter:description" content="Experience the next generation of instant messaging with Mensahe. Connect with friends, family, and communities in real-time.">
+    <meta name="twitter:title" content="Mensahe - Connect with Your Forest of Friends">
+    <meta name="twitter:description" content="Step into Mensahe, a cozy corner of the internet where you can connect with friends and communities.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     
     <style>
+        :root {
+            --bg-dark-forest: #2F3D34;
+            --text-parchment: #F4F1DE;
+            --accent-moss-green: #84a98c;
+            --accent-earthy-brown: #5E503F;
+            --accent-terracotta: #C08552;
+            --highlight-sunlight: #FCE49C;
+            --font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -22,22 +36,25 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: var(--font-family);
             line-height: 1.6;
-            color: #1a202c;
-            background-color: #f8fafc;
+            color: var(--text-parchment);
+            background-color: var(--bg-dark-forest);
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><g fill="%233c4a40" fill-opacity="0.4"><circle fill-opacity="0.3" cx="50" cy="50" r="50"/><circle cx="0" cy="50" r="50"/><circle cx="100" cy="50" r="50"/><circle cx="50" cy="0" r="50"/><circle cx="50" cy="100" r="50"/></g></svg>');
+            min-height: 100vh;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
             padding: 0 20px;
         }
 
         /* Header */
         .header {
-            background: white;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            background: rgba(47, 61, 52, 0.5);
+            backdrop-filter: blur(8px);
+            border-bottom: 2px solid var(--accent-earthy-brown);
             position: sticky;
             top: 0;
             z-index: 100;
@@ -53,96 +70,127 @@
         .logo {
             font-size: 1.5rem;
             font-weight: 700;
-            color: #4299e1;
+            color: var(--text-parchment);
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.75rem;
         }
 
         .logo img {
-            width: 32px;
-            height: 32px;
+            width: 36px;
+            height: 36px;
+            transition: transform 0.3s ease;
+        }
+        .logo:hover img {
+            transform: rotate(-10deg) scale(1.1);
         }
 
         .logo-text {
             font-size: 1.5rem;
             font-weight: 700;
-            color: #4299e1;
+            color: var(--text-parchment);
         }
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 1.5rem;
             list-style: none;
         }
 
         .nav-links a {
-            color: #4a5568;
+            color: var(--text-parchment);
             text-decoration: none;
-            font-weight: 500;
-            transition: color 0.2s;
+            font-weight: 600;
+            transition: all 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            position: relative;
         }
 
         .nav-links a:hover {
-            color: #4299e1;
+            color: var(--highlight-sunlight);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: var(--highlight-sunlight);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+            left: 0;
         }
 
         /* Hero Section */
         .hero {
-            padding: 4rem 0;
+            padding: 5rem 0 6rem;
             text-align: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: linear-gradient(170deg, rgba(132, 169, 140, 0.3) 0%, rgba(47, 61, 52, 0.8) 70%), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><defs><pattern id="sunlight" patternUnits="userSpaceOnUse" width="300" height="300"><g transform="translate(50,50) scale(1)"><path d="M 0 50 L 50 0 L 100 50 Z" fill="rgba(252, 228, 156, 0.05)"/></g></pattern></defs><rect width="100%" height="100%" fill="url(%23sunlight)"/></svg>');
+            position: relative;
+            overflow: hidden;
+            border-bottom: 4px solid var(--accent-earthy-brown);
         }
 
         .hero h1 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 700;
             margin-bottom: 1rem;
             line-height: 1.2;
+            color: var(--text-parchment);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
         }
 
         .hero p {
             font-size: 1.25rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
+            margin-bottom: 2.5rem;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
+            color: var(--text-parchment);
+            opacity: 0.9;
         }
 
         .cta-button {
             display: inline-block;
-            background: #4299e1;
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 8px;
+            background: var(--accent-terracotta);
+            color: var(--text-parchment);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 1.1rem;
-            transition: all 0.2s;
-            border: none;
+            transition: all 0.3s ease;
+            border: 2px solid #DDC9A3;
+            border-bottom: 4px solid #A46A48;
             cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
         .cta-button:hover {
-            background: #3182ce;
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            background: #D98C6B;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
         }
 
         /* Features Section */
         .features {
-            padding: 4rem 0;
-            background: white;
+            padding: 5rem 0;
         }
 
         .section-title {
             text-align: center;
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             font-weight: 700;
             margin-bottom: 3rem;
-            color: #1a202c;
+            color: var(--text-parchment);
         }
 
         .features-grid {
@@ -153,34 +201,44 @@
         }
 
         .feature-card {
-            background: #f7fafc;
-            padding: 2rem;
-            border-radius: 12px;
+            background: rgba(244, 241, 222, 0.05);
+            padding: 2.5rem 2rem;
+            border-radius: 20px;
             text-align: center;
-            border: 1px solid #e2e8f0;
+            border: 2px solid var(--accent-moss-green);
+            transition: all 0.3s ease;
+            box-shadow: inset 0 0 15px rgba(132, 169, 140, 0.1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2), inset 0 0 15px rgba(132, 169, 140, 0.2);
         }
 
         .feature-icon {
             font-size: 3rem;
             margin-bottom: 1rem;
+            color: var(--highlight-sunlight);
+            display: inline-block;
         }
 
         .feature-card h3 {
             font-size: 1.5rem;
-            font-weight: 600;
+            font-weight: 700;
             margin-bottom: 1rem;
-            color: #2d3748;
+            color: var(--accent-moss-green);
         }
 
         .feature-card p {
-            color: #4a5568;
-            line-height: 1.6;
+            color: var(--text-parchment);
+            opacity: 0.9;
+            line-height: 1.7;
         }
 
         /* How It Works */
         .how-it-works {
-            padding: 4rem 0;
-            background: #f8fafc;
+            padding: 5rem 0;
+            background: rgba(0,0,0,0.1);
         }
 
         .steps {
@@ -196,43 +254,45 @@
         }
 
         .step-number {
-            background: #4299e1;
-            color: white;
-            width: 3rem;
-            height: 3rem;
+            background: var(--accent-moss-green);
+            color: var(--bg-dark-forest);
+            width: 3.5rem;
+            height: 3.5rem;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            font-size: 1.25rem;
-            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+            margin: 0 auto 1.5rem;
+            border: 3px solid var(--text-parchment);
         }
 
         .step h3 {
             font-size: 1.25rem;
-            font-weight: 600;
+            font-weight: 700;
             margin-bottom: 1rem;
-            color: #2d3748;
+            color: var(--text-parchment);
         }
 
         .step p {
-            color: #4a5568;
+            color: var(--text-parchment);
+            opacity: 0.8;
         }
 
         /* Waitlist Section */
         .waitlist {
-            padding: 4rem 0;
-            background: white;
+            padding: 5rem 0;
         }
 
         .waitlist-form {
             max-width: 500px;
             margin: 0 auto;
-            background: #f7fafc;
-            padding: 2rem;
-            border-radius: 12px;
-            border: 1px solid #e2e8f0;
+            background: rgba(47, 61, 52, 0.5);
+            padding: 2.5rem;
+            border-radius: 20px;
+            border: 2px solid var(--accent-earthy-brown);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
 
         .form-group {
@@ -243,71 +303,85 @@
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 600;
-            color: #2d3748;
+            color: var(--accent-moss-green);
         }
 
         .form-group input {
             width: 100%;
-            padding: 0.75rem;
-            border: 2px solid #e2e8f0;
-            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--accent-moss-green);
+            border-radius: 10px;
             font-size: 1rem;
-            transition: border-color 0.2s;
+            font-family: var(--font-family);
+            transition: all 0.3s;
+            background: var(--bg-dark-forest);
+            color: var(--text-parchment);
         }
 
         .form-group input:focus {
             outline: none;
-            border-color: #4299e1;
+            border-color: var(--highlight-sunlight);
+            box-shadow: 0 0 10px rgba(252, 228, 156, 0.3);
+        }
+
+        .form-group input::placeholder {
+            color: rgba(244, 241, 222, 0.6);
         }
 
         .submit-button {
             width: 100%;
-            background: #4299e1;
-            color: white;
-            padding: 1rem;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
+            background: var(--accent-terracotta);
+            color: var(--text-parchment);
+            padding: 0.8rem 1rem;
+            border: 2px solid #DDC9A3;
+            border-bottom: 4px solid #A46A48;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-family: var(--font-family);
+            font-weight: 700;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: all 0.3s ease;
         }
 
         .submit-button:hover {
-            background: #3182ce;
+            transform: translateY(-2px);
+            background: #D98C6B;
         }
 
         .submit-button:disabled {
             opacity: 0.6;
             cursor: not-allowed;
+            transform: none;
         }
 
+        #message { margin-top: 1.5rem; }
+
         .success-message {
-            background: #f0fff4;
-            border: 1px solid #9ae6b4;
-            color: #22543d;
+            background: rgba(132, 169, 140, 0.3);
+            border: 1px solid var(--accent-moss-green);
+            color: var(--text-parchment);
             padding: 1rem;
-            border-radius: 8px;
-            margin-top: 1rem;
+            border-radius: 10px;
             text-align: center;
         }
 
         .error-message {
-            background: #fed7d7;
-            border: 1px solid #feb2b2;
-            color: #742a2a;
+            background: rgba(192, 133, 82, 0.3);
+            border: 1px solid var(--accent-terracotta);
+            color: var(--text-parchment);
             padding: 1rem;
-            border-radius: 8px;
-            margin-top: 1rem;
+            border-radius: 10px;
             text-align: center;
         }
 
         /* Footer */
         .footer {
-            background: #2d3748;
-            color: white;
-            padding: 2rem 0;
+            background: #253129;
+            color: var(--text-parchment);
+            padding: 2.5rem 0;
             text-align: center;
+            border-top: 4px solid var(--accent-earthy-brown);
+            margin-top: 3rem;
         }
 
         .footer p {
@@ -317,27 +391,15 @@
         /* Responsive Design */
         @media (max-width: 768px) {
             .hero h1 {
-                font-size: 2rem;
-            }
-
-            .hero p {
-                font-size: 1.1rem;
+                font-size: 2.5rem;
             }
 
             .section-title {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
 
             .nav-links {
                 display: none;
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .steps {
-                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -353,7 +415,7 @@
             <ul class="nav-links">
                 <li><a href="#features">Features</a></li>
                 <li><a href="#how-it-works">How It Works</a></li>
-                <li><a href="#waitlist">Join Waitlist</a></li>
+                <li><a href="#waitlist">Join the Community</a></li>
             </ul>
         </nav>
     </header>
@@ -361,46 +423,46 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <h1>Connect Instantly, Stay Connected</h1>
-            <p>Remember the excitement of hearing that familiar "Yahoo!" sound? Mensahe brings back that magic of instant connection with modern technology. Chat with friends, family, and communities in real-time - just like the good old days, but better.</p>
-            <a href="#waitlist" class="cta-button">Get Early Access</a>
+            <h1>A Cozy Corner of the Internet</h1>
+            <p>Remember the magic of discovering a hidden path in the woods? Mensahe is like that—a friendly, welcoming place to chat with friends, share your stories, and build your own little community online.</p>
+            <a href="#waitlist" class="cta-button">Find Your Friends</a>
         </div>
     </section>
 
     <!-- Features Section -->
     <section id="features" class="features">
         <div class="container">
-            <h2 class="section-title">Why Choose Mensahe?</h2>
+            <h2 class="section-title">Explore the Forest of Features</h2>
             <div class="features-grid">
                 <div class="feature-card">
-                    <div class="feature-icon">⚡</div>
+                    <div class="feature-icon">🌿</div>
                     <h3>Instant Messaging</h3>
-                    <p>Send messages that arrive instantly, just like the classic IM days. No more waiting for emails or missed calls - your conversations happen in real-time.</p>
+                    <p>Whisper across the woods with messages that arrive instantly. Your conversations are as alive and real-time as a bustling forest.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">🔒</div>
+                    <div class="feature-icon">🍄</div>
                     <h3>Private & Secure</h3>
-                    <p>Your conversations stay between you and your friends. Built with modern security, so you can chat freely without worrying about privacy.</p>
+                    <p>Your chats are your secret hideaway. With modern, end-to-end security, your conversations are for your eyes only.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">👥</div>
+                    <div class="feature-icon">🏡</div>
                     <h3>Build Communities</h3>
-                    <p>Create chat rooms, join groups, and connect with people who share your interests. It's like the old chat rooms, but with real people you actually know.</p>
+                    <p>Gather your friends in cozy chat rooms. Share interests, plan adventures, and create a space that feels like home.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">📱</div>
+                    <div class="feature-icon">🦋</div>
                     <h3>Works Everywhere</h3>
-                    <p>Chat on your phone, tablet, or computer. Your conversations sync across all your devices, so you never miss a message.</p>
+                    <p>Your treehouse follows you wherever you go. Chat seamlessly on your phone, tablet, or computer, and never miss a beat.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">🎨</div>
                     <h3>Express Yourself</h3>
-                    <p>Send emojis, share photos, and express yourself with rich media. Make your conversations as colorful and fun as you want them to be.</p>
+                    <p>Decorate your messages with emojis and photos. Make every chat as colorful and unique as a forest in full bloom.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">🌍</div>
-                    <h3>Global Connections</h3>
-                    <p>Connect with friends around the world. Distance doesn't matter when you can chat instantly, just like the internet promised us in the 90s.</p>
+                    <div class="feature-icon">✨</div>
+                    <h3>A Touch of Magic</h3>
+                    <p>Discover delightful little surprises and a touch of Ghibli-inspired magic that makes every conversation special.</p>
                 </div>
             </div>
         </div>
@@ -409,22 +471,22 @@
     <!-- How It Works -->
     <section id="how-it-works" class="how-it-works">
         <div class="container">
-            <h2 class="section-title">Getting Started is Easy</h2>
+            <h2 class="section-title">Your Adventure Begins Here</h2>
             <div class="steps">
                 <div class="step">
                     <div class="step-number">1</div>
-                    <h3>Sign Up</h3>
-                    <p>Create your account with just your email. No complicated setup - just like the old days when you could start chatting in seconds.</p>
+                    <h3>Pack Your Bag</h3>
+                    <p>Sign up with just your email. It’s as simple as stepping onto a new path—no complicated maps needed.</p>
                 </div>
                 <div class="step">
                     <div class="step-number">2</div>
-                    <h3>Find Friends</h3>
-                    <p>Connect with friends and family. Import your contacts or search for people you know. Start building your network instantly.</p>
+                    <h3>Find Your Friends</h3>
+                    <p>Invite your fellow adventurers or search for them by their trail names. Your party will assemble in no time!</p>
                 </div>
                 <div class="step">
                     <div class="step-number">3</div>
                     <h3>Start Chatting</h3>
-                    <p>Send your first message and experience the joy of instant connection. It's that simple - just like Yahoo! Messenger, but for today's world.</p>
+                    <p>Send your first message and watch your community grow. It’s that simple to start your new adventure.</p>
                 </div>
             </div>
         </div>
@@ -433,15 +495,15 @@
     <!-- Waitlist Section -->
     <section id="waitlist" class="waitlist">
         <div class="container">
-            <h2 class="section-title">Be Among the First to Experience the Magic</h2>
-            <p style="text-align: center; margin-bottom: 2rem; color: #4a5568; font-size: 1.1rem;">
-                Remember when you first discovered instant messaging? That feeling of connecting instantly with friends? We're bringing that back, but better. Join our exclusive waitlist to get early access when we launch.
+            <h2 class="section-title">Join the First Explorers</h2>
+            <p style="text-align: center; margin-bottom: 2rem; color: var(--text-parchment); opacity: 0.9; font-size: 1.1rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+                A new world of connection is about to bloom. Be among the first to step into Mensahe and help us build a kinder, cozier internet.
             </p>
             
             <form class="waitlist-form" id="waitlistForm">
                 <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+                    <label for="email">Your Trail Name (Email)</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email to join the waitlist" required>
                 </div>
                 <button type="submit" class="submit-button" id="submitButton">
                     Join the Waitlist
@@ -454,7 +516,7 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 Mensahe. Bringing back the magic of instant messaging.</p>
+            <p>&copy; 2024 Mensahe. Building cozier corners on the internet.</p>
         </div>
     </footer>
 
@@ -466,35 +528,29 @@
             const submitButton = document.getElementById('submitButton');
             const messageDiv = document.getElementById('message');
             
-            // Basic email validation
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(email)) {
                 showMessage('Please enter a valid email address.', 'error');
                 return;
             }
             
-            // Disable button and show loading state
             submitButton.disabled = true;
             submitButton.textContent = 'Joining...';
             
             try {
-                // For now, simulate API call
-                // In production, this would send to your backend
                 await new Promise(resolve => setTimeout(resolve, 1000));
                 
-                // Store email in localStorage for demo purposes
-                // In production, this would be sent to your server
                 const waitlist = JSON.parse(localStorage.getItem('mensahe_waitlist') || '[]');
                 if (!waitlist.includes(email)) {
                     waitlist.push(email);
                     localStorage.setItem('mensahe_waitlist', JSON.stringify(waitlist));
                 }
                 
-                showMessage('🎉 Welcome to the waitlist! We\'ll notify you when we launch.', 'success');
+                showMessage('🎉 Welcome, adventurer! We\'ll send a message when the path is open.', 'success');
                 document.getElementById('email').value = '';
                 
             } catch (error) {
-                showMessage('Something went wrong. Please try again.', 'error');
+                showMessage('A mischievous spirit blocked the path. Please try again.', 'error');
             } finally {
                 submitButton.disabled = false;
                 submitButton.textContent = 'Join the Waitlist';
@@ -506,11 +562,9 @@
             messageDiv.className = type === 'success' ? 'success-message' : 'error-message';
             messageDiv.textContent = text;
             
-            // Scroll to message
             messageDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
         
-        // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -525,4 +579,4 @@
         });
     </script>
 </body>
-</html> 
+</html>
