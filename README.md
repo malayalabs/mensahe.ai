@@ -37,6 +37,39 @@ npm run build:extension
 # Load extension from extension-dist/ in Chrome
 ```
 
+## 🌐 Landing Page
+
+A marketing-focused landing page is available in the `static-site/` folder, designed for GitHub Pages deployment.
+
+### Local Development
+```bash
+# Navigate to static site
+cd static-site
+
+# Open in browser
+open index.html
+
+# Or serve with local server
+python3 -m http.server 8000
+# Visit http://localhost:8000
+```
+
+### Deployment
+```bash
+# Use the deployment script
+cd static-site
+./deploy.sh
+
+# Or manually deploy to GitHub Pages
+# See static-site/README.md for detailed instructions
+```
+
+The landing page includes:
+- **Marketing copy** focused on passkey benefits
+- **Waitlist collection** for early access signups
+- **Responsive design** matching the app's UI
+- **SEO optimization** with proper meta tags
+
 ## 🏗️ Architecture
 
 ### Backend (PHP)
@@ -100,6 +133,10 @@ cd src/server
 
 ```
 mensahe.ai/
+├── static-site/           # Landing page for GitHub Pages
+│   ├── index.html         # Main landing page
+│   ├── README.md          # Deployment instructions
+│   └── deploy.sh          # Deployment script
 ├── src/
 │   ├── extension/          # Chrome extension
 │   │   ├── assets/         # Icons and logos
