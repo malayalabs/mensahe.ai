@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
 
-require_once __DIR__ . '/../SRC/SERVER/REGISTERREQUEST.PHP';
+require_once __DIR__ . '/../RegisterRequestLib.php';
 
 final class RegisterRequestTest extends TestCase
 {
@@ -40,12 +40,7 @@ final class RegisterRequestTest extends TestCase
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('Invalid JSON');
-        // Temporarily override php://input
-        stream_wrapper_unregister('php');
-        stream_wrapper_register('php', MockPhpStream::class);
-        file_put_contents('php://input', 'not-json');
-        getRequestData();
-        stream_wrapper_restore('php');
+        getRequestData('not-json');
     }
 }
 
