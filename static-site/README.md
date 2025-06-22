@@ -44,10 +44,19 @@ To use a custom domain like `mensahe.ai`:
 ```
 static-site/
 ├── index.html          # Main landing page
-├── mensahe-logo.svg    # App logo from extension
-├── README.md           # This file
-└── CNAME              # Custom domain (if using)
+├── mensahe-logo.svg    # App logo
+└── README.md           # This file
 ```
+
+## Deployment
+
+To deploy the landing page, run the `deploy-landing-page.sh` script from the root of the project:
+
+```bash
+./deploy-landing-page.sh
+```
+
+Then, in your GitHub repository settings, set the source for GitHub Pages to the `gh-pages` branch.
 
 ## Customization
 
