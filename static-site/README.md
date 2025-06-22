@@ -50,10 +50,11 @@ static-site/
 
 ## Deployment
 
-To deploy the landing page, run the `deploy-landing-page.sh` script from the root of the project:
+To deploy the landing page, navigate to the `static-site` directory and run the script:
 
 ```bash
-./deploy-landing-page.sh
+cd static-site
+./deploy.sh
 ```
 
 Then, in your GitHub repository settings, set the source for GitHub Pages to the `gh-pages` branch.

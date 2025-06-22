@@ -55,10 +55,10 @@ python3 -m http.server 8000
 ```
 
 ### Deployment
-To deploy the landing page, run the script from the project root:
+To deploy the landing page, navigate into the `static-site` directory and run the deployment script:
 ```bash
-# Ensure you have committed your latest changes
-./deploy-landing-page.sh
+cd static-site
+./deploy.sh
 ```
 This script will build the static site to the `gh-pages` branch. For more details, see the `static-site/README.md`.
 
