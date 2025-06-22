@@ -1,6 +1,6 @@
 # Mensahe.ai
 
-A secure passkey authentication system with a modern web interface and robust backend API.
+A next-generation instant messaging platform with secure peer-to-peer communication and a modern web interface.
 
 ## 🚀 Quick Start
 
@@ -24,7 +24,7 @@ composer install
 The backend will be available at `http://localhost:8080`
 
 ### Frontend Testing
-Open `http://localhost:8080/test-frontend.html` in your browser to test the passkey authentication interface.
+Open `http://localhost:8080/test-frontend.html` in your browser to test the messaging interface.
 
 ### Extension Development
 ```bash
@@ -39,7 +39,7 @@ npm run build:extension
 
 ## 🌐 Landing Page
 
-A marketing-focused landing page is available in the `static-site/` folder, designed for GitHub Pages deployment.
+A marketing-focused landing page is available in the `static-site/` folder, designed for GitHub Pages deployment with nostalgic 90s-2000s messaging vibes.
 
 ### Local Development
 ```bash
@@ -65,7 +65,7 @@ cd static-site
 ```
 
 The landing page includes:
-- **Marketing copy** focused on passkey benefits
+- **Marketing copy** focused on instant messaging and social connections
 - **Waitlist collection** for early access signups
 - **Responsive design** matching the app's UI
 - **SEO optimization** with proper meta tags

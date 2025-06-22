@@ -1,10 +1,10 @@
 # Mensahe Landing Page
 
-This is the static landing page for Mensahe, a secure passkey authentication service. The site is designed to be deployed on GitHub Pages.
+This is the static landing page for Mensahe, a next-generation instant messaging platform. The site is designed to be deployed on GitHub Pages.
 
 ## Features
 
-- **Marketing-focused landing page** with clear value proposition
+- **Marketing-focused landing page** with nostalgic 90s-2000s messaging vibes
 - **Waitlist collection** for early access signups
 - **Responsive design** that works on all devices
 - **SEO optimized** with proper meta tags
