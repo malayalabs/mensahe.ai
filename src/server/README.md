@@ -9,7 +9,7 @@ The backend uses a service-oriented architecture with the `PassKeyAuthService` c
 ### Key Components
 
 - **`PassKeyAuthService.php`**: Main service class for WebAuthn operations
-- **`register-request.php`**: HTTP endpoint for initiating passkey registration
+- **`registerRequest.php`**: HTTP endpoint for initiating passkey registration
 - **`test-registration.php`**: Command-line test script for the service
 - **`test-frontend.html`**: Web-based test page for frontend integration
 
@@ -29,7 +29,7 @@ To run this backend locally, you will need a PHP development environment (like X
    ```bash
    # Option 1: Use the convenience script
    ./start-server.sh
-   
+
    # Option 2: Manual start
    php -S localhost:8080
    ```
@@ -38,7 +38,7 @@ To run this backend locally, you will need a PHP development environment (like X
    ```bash
    # Test the service directly
    php test-registration.php
-   
+
    # Test via web interface
    # Open http://localhost:8080/test-frontend.html in your browser
    ```
@@ -84,7 +84,7 @@ Testing with empty username (should fail):
 
 ## API Endpoints
 
-### POST /register-request.php
+### POST /registerRequest.php
 
 Initiates the passkey registration process.
 
@@ -123,7 +123,7 @@ Initiates the passkey registration process.
 ## File Structure
 
 - `/PassKeyAuthService.php`: Main service class for WebAuthn operations
-- `/register-request.php`: Generates the challenge and options for a new passkey registration
+- `/registerRequest.php`: Generates the challenge and options for a new passkey registration
 - `/test-registration.php`: Command-line test script
 - `/test-frontend.html`: Web-based test interface
 - `/start-server.sh`: Convenience script to start the development server
@@ -143,4 +143,4 @@ Initiates the passkey registration process.
 - Add `/login-request.php` and `/login-verify.php` for authentication
 - Implement proper database storage for user credentials
 - Add production-ready CORS configuration
-- Implement rate limiting and additional security measures 
+- Implement rate limiting and additional security measures

@@ -37,7 +37,7 @@ async function handleLogin(username, shadowRoot) {
     statusElement.textContent = 'Connecting to server...';
     statusElement.className = 'status-message loading';
 
-    const response = await fetch(`${BACKEND_URL}/register-request.php`, {
+    const response = await fetch(`${BACKEND_URL}/registerRequest.php`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

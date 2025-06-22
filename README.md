@@ -94,7 +94,7 @@ mensahe.ai/
 │   └── server/               # PHP backend
 │       ├── README.md         # Backend documentation and API reference
 │       ├── PassKeyAuthService.php # WebAuthn authentication service
-│       ├── register-request.php   # Registration API endpoint
+│       ├── registerRequest.php    # Registration API endpoint
 │       ├── composer.json          # PHP dependencies
 │       └── ...                # Additional backend files
 ├── scripts/

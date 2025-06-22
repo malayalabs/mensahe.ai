@@ -74,14 +74,14 @@
     <div class="container">
         <h1>🧪 Mensahe Backend Test</h1>
         <p>This page tests the communication between the frontend and the PHP backend.</p>
-        
+
         <div class="form-group">
             <label for="username">Username:</label>
             <input type="text" id="username" placeholder="Enter username (e.g., test@example.com)" value="test@example.com">
         </div>
-        
+
         <button onclick="testRegistration()">Test Registration Endpoint</button>
-        
+
         <div id="result"></div>
     </div>
 
@@ -89,27 +89,27 @@
         async function testRegistration() {
             const resultDiv = document.getElementById('result');
             const username = document.getElementById('username').value.trim();
-            
+
             if (!username) {
                 resultDiv.className = 'result error';
                 resultDiv.textContent = 'Please enter a username';
                 return;
             }
-            
+
             resultDiv.className = 'result loading';
             resultDiv.textContent = 'Testing registration endpoint...';
-            
+
             try {
-                const response = await fetch('http://localhost:8080/register-request.php', {
+                const response = await fetch('http://localhost:8080/registeRequest.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({ username })
                 });
-                
+
                 const data = await response.json();
-                
+
                 if (response.ok) {
                     resultDiv.className = 'result success';
                     resultDiv.textContent = `✅ Success! Registration options received:\n\n` +
@@ -129,7 +129,7 @@
                     `Make sure the PHP server is running on localhost:8080`;
             }
         }
-        
+
         // Auto-test on page load
         window.addEventListener('load', () => {
             console.log('Mensahe Backend Test Page Loaded');
@@ -137,4 +137,4 @@
         });
     </script>
 </body>
-</html> 
+</html>
