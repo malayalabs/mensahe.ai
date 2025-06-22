@@ -89,4 +89,7 @@ dist
 
 # Temporary folders
 tmp/
-temp/ 
+temp/
+
+# Temporary deployment directory
+/temp-deploy-dir/ 
