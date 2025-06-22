@@ -89,7 +89,4 @@ dist
 
 # Temporary folders
 tmp/
-temp/
-
-# PHPUnit cache
-src/server/.phpunit.cache/ 
+temp/ 
