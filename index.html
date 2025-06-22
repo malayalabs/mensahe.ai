@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mensahe - Connect with Your Forest of Friends</title>
+    <meta name="description" content="Mensahe is a secure peer-to-peer messaging app with end-to-end encryption. Create unique 2D character personas and join exclusive communities with truly private conversations.">
+    <meta name="keywords" content="secure messaging, peer-to-peer, end-to-end encryption, private chat, messaging app, character creation, personas, communities, privacy">
+    <meta property="og:title" content="Mensahe - Connect with Your Forest of Friends">
+    <meta property="og:description" content="Mensahe is a secure peer-to-peer messaging app with end-to-end encryption. Create unique 2D character personas and join exclusive communities with truly private conversations.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mensahe.ai">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Mensahe - Connect with Your Forest of Friends">
+    <meta name="twitter:description" content="Mensahe is a secure peer-to-peer messaging app with end-to-end encryption. Create unique 2D character personas and join exclusive communities with truly private conversations.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-dark-forest: #2F3D34;
+            --text-parchment: #F4F1DE;
+            --accent-moss-green: #84a98c;
+            --accent-earthy-brown: #5E503F;
+            --accent-terracotta: #C08552;
+            --highlight-sunlight: #FCE49C;
+            --font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            line-height: 1.6;
+            color: var(--text-parchment);
+            background-color: var(--bg-dark-forest);
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><g fill="%233c4a40" fill-opacity="0.4"><circle fill-opacity="0.3" cx="50" cy="50" r="50"/><circle cx="0" cy="50" r="50"/><circle cx="100" cy="50" r="50"/><circle cx="50" cy="0" r="50"/><circle cx="50" cy="100" r="50"/></g></svg>');
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(47, 61, 52, 0.5);
+            backdrop-filter: blur(8px);
+            border-bottom: 2px solid var(--accent-earthy-brown);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-parchment);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo img {
+            width: 36px;
+            height: 36px;
+            transition: transform 0.3s ease;
+        }
+        .logo:hover img {
+            transform: rotate(-10deg) scale(1.1);
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-parchment);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-parchment);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--highlight-sunlight);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: var(--highlight-sunlight);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+            left: 0;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 5rem 0 6rem;
+            text-align: center;
+            background: linear-gradient(170deg, rgba(132, 169, 140, 0.3) 0%, rgba(47, 61, 52, 0.8) 70%),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><defs><pattern id="sunlight" patternUnits="userSpaceOnUse" width="300" height="300"><g transform="translate(50,50) scale(1)"><path d="M 0 50 L 50 0 L 100 50 Z" fill="rgba(252, 228, 156, 0.05)"/></g></pattern></defs><rect width="100%" height="100%" fill="url(%23sunlight)"/></svg>');
+            position: relative;
+            overflow: hidden;
+            border-bottom: 4px solid var(--accent-earthy-brown);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            color: var(--text-parchment);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            color: var(--text-parchment);
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--accent-terracotta);
+            color: var(--text-parchment);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: 2px solid #DDC9A3;
+            border-bottom: 4px solid #A46A48;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            background: #D98C6B;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .cta-button.secondary {
+            background: transparent;
+            border: 2px solid var(--accent-moss-green);
+            color: var(--accent-moss-green);
+        }
+
+        .cta-button.secondary:hover {
+            background: var(--accent-moss-green);
+            color: var(--bg-dark-forest);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: var(--text-parchment);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: rgba(244, 241, 222, 0.05);
+            padding: 2.5rem 2rem;
+            border-radius: 20px;
+            text-align: center;
+            border: 2px solid var(--accent-moss-green);
+            transition: all 0.3s ease;
+            box-shadow: inset 0 0 15px rgba(132, 169, 140, 0.1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2), inset 0 0 15px rgba(132, 169, 140, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--highlight-sunlight);
+            display: inline-block;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--accent-moss-green);
+        }
+
+        .feature-card p {
+            color: var(--text-parchment);
+            opacity: 0.9;
+            line-height: 1.7;
+        }
+
+        /* How It Works */
+        .how-it-works {
+            padding: 5rem 0;
+            background: rgba(0,0,0,0.1);
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .step {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .step-number {
+            background: var(--accent-moss-green);
+            color: var(--bg-dark-forest);
+            width: 3.5rem;
+            height: 3.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin: 0 auto 1.5rem;
+            border: 3px solid var(--text-parchment);
+        }
+
+        .step h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-parchment);
+        }
+
+        .step p {
+            color: var(--text-parchment);
+            opacity: 0.8;
+        }
+
+        /* Waitlist Section */
+        .waitlist {
+            padding: 5rem 0;
+        }
+
+        .waitlist-form {
+            max-width: 500px;
+            margin: 0 auto;
+            background: rgba(47, 61, 52, 0.5);
+            padding: 2.5rem;
+            border-radius: 20px;
+            border: 2px solid var(--accent-earthy-brown);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--accent-moss-green);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--accent-moss-green);
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: var(--font-family);
+            transition: all 0.3s;
+            background: var(--bg-dark-forest);
+            color: var(--text-parchment);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--highlight-sunlight);
+            box-shadow: 0 0 10px rgba(252, 228, 156, 0.3);
+        }
+
+        .form-group input::placeholder {
+            color: rgba(244, 241, 222, 0.6);
+        }
+
+        .submit-button {
+            width: 100%;
+            background: var(--accent-terracotta);
+            color: var(--text-parchment);
+            padding: 0.8rem 1rem;
+            border: 2px solid #DDC9A3;
+            border-bottom: 4px solid #A46A48;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-family: var(--font-family);
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-2px);
+            background: #D98C6B;
+        }
+
+        .submit-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        #message { margin-top: 1.5rem; }
+
+        .success-message {
+            background: rgba(132, 169, 140, 0.3);
+            border: 1px solid var(--accent-moss-green);
+            color: var(--text-parchment);
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .error-message {
+            background: rgba(192, 133, 82, 0.3);
+            border: 1px solid var(--accent-terracotta);
+            color: var(--text-parchment);
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        /* Footer */
+        .footer {
+            background: #253129;
+            color: var(--text-parchment);
+            padding: 2.5rem 0;
+            text-align: center;
+            border-top: 4px solid var(--accent-earthy-brown);
+            margin-top: 3rem;
+        }
+
+        .footer p {
+            opacity: 0.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .logo {
+                padding-left: 1rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .hero-buttons .cta-button {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <a href="#" class="logo">
+                <img src="mensahe-logo.svg" alt="Mensahe Logo">
+                <span class="logo-text">Mensahe</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#waitlist">Join the Community</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>A Cozy Corner of the Internet</h1>
+            <p>Connect with friends and communities through secure peer-to-peer messaging. Inspired by nature and the magic of connection, your messages travel directly between devices with end-to-end encryption. Create unique 2D character personas and explore exclusive communities where each user can journey.</p>
+            <div class="hero-buttons">
+                <a href="#waitlist" class="cta-button">Join the Waitlist</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">Secure Messaging Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>End-to-End Encryption</h3>
+                    <p>Your messages are encrypted from device to device. Only you and your intended recipient can read them.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌲</div>
+                    <h3>Exclusive Communities</h3>
+                    <p>Join unique communities where each user can only journey once, creating truly special connections.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎭</div>
+                    <h3>Custom Personas</h3>
+                    <p>Create unique 2D character personas to represent yourself in different communities and conversations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How Secure Messaging Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Join the Waitlist</h3>
+                    <p>Sign up to be among the first to experience secure peer-to-peer messaging with customizable personas.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Create Your Persona</h3>
+                    <p>Design your 2D character persona when the app launches. Each persona can join different communities.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Connect Securely</h3>
+                    <p>Start sending encrypted messages directly to friends. Your conversations are private and secure by default.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Waitlist Section -->
+    <section id="waitlist" class="waitlist">
+        <div class="container">
+            <h2 class="section-title">Join the Secure Messaging Revolution</h2>
+            <p style="text-align: center; margin-bottom: 2rem; color: var(--text-parchment); opacity: 0.9; font-size: 1.1rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+                Be among the first to experience truly private, peer-to-peer messaging with customizable personas. Your conversations will be secure by design.
+            </p>
+
+            <form class="waitlist-form" id="waitlistForm">
+                <div class="form-group">
+                    <label for="email">Your Trail Name (Email)</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email to join the waitlist" required>
+                </div>
+                <button type="submit" class="submit-button" id="submitButton">
+                    Join the Waitlist
+                </button>
+                <div id="message"></div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Mensahe. Building cozier corners on the internet.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Waitlist form functionality
+        document.getElementById('waitlistForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const email = document.getElementById('email').value.trim();
+            const submitButton = document.getElementById('submitButton');
+            const messageDiv = document.getElementById('message');
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                showMessage('Please enter a valid email address.', 'error');
+                return;
+            }
+
+            submitButton.disabled = true;
+            submitButton.textContent = 'Joining...';
+
+            try {
+                await new Promise(resolve => setTimeout(resolve, 1000));
+
+                const waitlist = JSON.parse(localStorage.getItem('mensahe_waitlist') || '[]');
+                if (!waitlist.includes(email)) {
+                    waitlist.push(email);
+                    localStorage.setItem('mensahe_waitlist', JSON.stringify(waitlist));
+                }
+
+                showMessage('🎉 Welcome, adventurer! We\'ll send a message when the path is open.', 'success');
+                document.getElementById('email').value = '';
+
+            } catch (error) {
+                showMessage('A mischievous spirit blocked the path. Please try again.', 'error');
+            } finally {
+                submitButton.disabled = false;
+                submitButton.textContent = 'Join the Waitlist';
+            }
+        });
+
+        function showMessage(text, type) {
+            const messageDiv = document.getElementById('message');
+            messageDiv.className = type === 'success' ? 'success-message' : 'error-message';
+            messageDiv.textContent = text;
+
+            messageDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
