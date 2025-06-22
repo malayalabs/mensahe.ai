@@ -13,6 +13,7 @@ use Webauthn\PublicKeyCredentialLoader;
 use Webauthn\AuthenticatorAttestationResponseValidator;
 use Webauthn\PublicKeyCredentialSourceRepository;
 use Webauthn\PublicKeyCredentialDescriptor;
+use Mensahe\Lib\Config;
 
 class PassKeyAuthService
 {
@@ -24,8 +25,8 @@ class PassKeyAuthService
     {
         // Relying Party (your application)
         $this->rpEntity = PublicKeyCredentialRpEntity::create(
-            'Mensahe', // App name
-            'localhost',    // Your domain
+            Config::get('app_name'), // App name from config
+            Config::get('app_domain'),    // Domain from config
             null
         );
 
