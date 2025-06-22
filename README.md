@@ -1,12 +1,12 @@
-# Mensahe Chat Widget
+# mensahe.ai
 
 <div align="center">
   <img src="src/extension/assets/mensahe-logo.svg" alt="Mensahe Logo" width="120" height="120">
-  <h1>Mensahe</h1>
+  <h1>Mensahe Chat Widget</h1>
   <p><strong>A secure peer-to-peer messaging system.</strong></p>
 </div>
 
-Mensahe is a chat widget designed for secure, peer-to-peer communication, delivered as a lightweight and installable browser extension.
+Mensahe.ai is a chat widget designed for secure, peer-to-peer communication, delivered as a lightweight and installable browser extension.
 
 ## Features
 
